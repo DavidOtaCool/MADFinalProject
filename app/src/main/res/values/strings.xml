@@ -3,8 +3,10 @@
 
     <string-array name="select_report">
         <item>All</item>
-        <item>This Week</item>
-        <item>This Month</item>
-        <item>This Year</item>
+        <item>Accident</item>
+        <item>Criminal</item>
+        <item>Infrastructure</item>
+        <item>Environment</item>
     </string-array>
+
 </resources>
