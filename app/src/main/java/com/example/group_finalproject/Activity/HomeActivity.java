@@ -6,13 +6,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.group_finalproject.API.APIRequestPostData;
@@ -21,6 +24,7 @@ import com.example.group_finalproject.Adapter.AdapterPostData;
 import com.example.group_finalproject.Model.PostDataModel;
 import com.example.group_finalproject.Model.PostResponseModel;
 import com.example.group_finalproject.R;
+import com.example.group_finalproject.Session.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +34,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    SessionManager sessionManagerHome;
+    TextView tvUserName;
+    String loggedUserName;
+    ImageView btnProfile;
+
     private RecyclerView postData;
     private RecyclerView.Adapter adPostData;
     private RecyclerView.LayoutManager lmPostData;
@@ -37,13 +47,26 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     private SwipeRefreshLayout srlPostData;
     private ProgressBar pbPostData;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_home2);
+
+        btnProfile = findViewById(R.id.btn_profile);
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+            }
+        });
+
+        sessionManagerHome = new SessionManager(HomeActivity.this);
+
+        tvUserName = findViewById(R.id.tv_home_username);
+        loggedUserName = sessionManagerHome.getUserDetail().get(sessionManagerHome.USERNAME);
+        tvUserName.setText(loggedUserName);
 
         Button addReportBtn = (Button) findViewById(R.id.btn_add_report);
         addReportBtn.setOnClickListener(new View.OnClickListener() {

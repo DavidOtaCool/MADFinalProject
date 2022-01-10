@@ -31,6 +31,7 @@ import retrofit2.Response;
 
 public class AddReportActivity extends AppCompatActivity {
 
+
     private EditText etCategory, etTextReport, etLocation, etAuthor;
     private Button btnAddReport;
     private String postCategory, postTextReport, postLocation, postAuthor;

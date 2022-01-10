@@ -1,6 +1,8 @@
 package com.example.group_finalproject.API;
 
+import com.example.group_finalproject.Model.Login.Login;
 import com.example.group_finalproject.Model.PostResponseModel;
+import com.example.group_finalproject.Model.Register.Register;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -42,6 +44,21 @@ public interface APIRequestPostData {
             @Field("post_category") String postCategory,
             @Field("post_text_report") String postTextReport,
             @Field("post_location") String postLocation
+    );
+
+    @FormUrlEncoded
+    @POST("login.php")
+    Call<Login> loginResponse(
+            @Field("user_email") String userEmail,
+            @Field("user_password") String userPassword
+    );
+
+    @FormUrlEncoded
+    @POST("register_user.php")
+    Call<Register> registerResponse(
+            @Field("user_name") String userName,
+            @Field("user_email") String userEmail,
+            @Field("user_password") String userPassword
     );
 
 }

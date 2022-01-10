@@ -6,10 +6,16 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.group_finalproject.R;
+import com.example.group_finalproject.Session.SessionManager;
 
 public class SplashScreenActivity extends AppCompatActivity {
+    
+    SessionManager sessionManager;
+//    TextView tvUserName;
+//    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +29,38 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        // timer
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-                finish();
-            }
-        }, 3000);
+
+        sessionManager = new SessionManager(SplashScreenActivity.this);
+        if(!sessionManager.isLoggedIn()){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    moveToLoginPage();
+                }
+            }, 3000);
+        }else{
+            // timer
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+//                    tvUserName = findViewById(R.id.tv_home_username);
+//                    userName = sessionManager.getUserDetail().get(SessionManager.USERNAME);
+//                    tvUserName.setText(userName);
+                    startActivity(new Intent(SplashScreenActivity.this, HomeActivity.class));
+
+//                    finish();
+                }
+            }, 3000);
+        }
+
+
+
+    }
+
+    private void moveToLoginPage() {
+        Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        finish();
     }
 }

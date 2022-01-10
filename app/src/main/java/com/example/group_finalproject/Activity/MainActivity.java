@@ -8,11 +8,27 @@ import android.view.Window;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.group_finalproject.API.APIRequestPostData;
+import com.example.group_finalproject.API.PostRetroServer;
+import com.example.group_finalproject.Model.Login.Login;
+import com.example.group_finalproject.Model.Login.LoginData;
 import com.example.group_finalproject.R;
+import com.example.group_finalproject.Session.SessionManager;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText etEmail, etPassword;
+    String userEmail, userPassword;
+    APIRequestPostData apiInterface;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
+        etEmail = findViewById(R.id.et_email);
+        etPassword = findViewById(R.id.et_password);
+
         TextView signUp = (TextView) findViewById(R.id.textView6);
         signUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), SignUpActivity.class);
-                startActivityForResult(myIntent, 0);
+                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
             }
 
         });
@@ -33,8 +51,49 @@ public class MainActivity extends AppCompatActivity {
         Button signInBtn = (Button) findViewById(R.id.btn_add_report);
         signInBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
-                startActivityForResult(myIntent, 0);
+                userEmail = etEmail.getText().toString();
+                userPassword = etPassword.getText().toString();
+                if(userEmail.trim().equals("")){
+                    etEmail.setError("Please enter your email");
+                }else if(userPassword.trim().equals("")){
+                    etPassword.setError("Please enter your password");
+                }else{
+                    login(userEmail, userPassword);
+                }
+            }
+
+            private void login(String userEmail, String userPassword) {
+
+                apiInterface = PostRetroServer.postConnectRetrofit().create(APIRequestPostData.class);
+                Call<Login> loginCall = apiInterface.loginResponse(userEmail, userPassword);
+                loginCall.enqueue(new Callback<Login>() {
+                    @Override
+                    public void onResponse(Call<Login> call, Response<Login> response) {
+                        if(response.body() != null && response.isSuccessful() && response.body().getCode()==1){
+
+                            sessionManager = new SessionManager(MainActivity.this);
+                            LoginData loginData = response.body().getLoginData();
+                            sessionManager.createLoginSession(loginData);
+
+//                            Toast.makeText(MainActivity.this, response.body().getLoginData().getUserName(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                            finish();
+
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Login> call, Throwable t) {
+//                        Toast.makeText(MainActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                          Toast.makeText(MainActivity.this, "Sorry, your email or password is incorrect", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
             }
 
         });

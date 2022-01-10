@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/drawable/custom_action_bar.xml" value="0.23544303797468355" />
+        <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/drawable/custom_btn.xml" value="0.23846153846153847" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/drawable/custom_text_input.xml" value="0.2240506329113924" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/drawable/custom_text_input2.xml" value="0.23291139240506328" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/drawable/fb_btn.xml" value="0.23846153846153847" />
@@ -11,9 +12,10 @@
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/drawable/sign_in_btn.xml" value="0.16296296296296298" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/activity_add_report.xml" value="0.264" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/activity_edit_post.xml" value="0.21557971014492755" />
-        <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/activity_home.xml" value="0.264" />
+        <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/activity_home.xml" value="0.4" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/activity_home2.xml" value="0.31275964391691397" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/activity_profile.xml" value="0.4" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/activity_splash_screen.xml" value="0.1793478260869565" />
         <entry key="..\:/1 President University/2nd Year/4th Semester/1. Course/Mobile Application Development/Final Project/Jababeka Report/Group_MAD_FinalProject-master/app/src/main/res/layout/category_item.xml" value="0.536" />

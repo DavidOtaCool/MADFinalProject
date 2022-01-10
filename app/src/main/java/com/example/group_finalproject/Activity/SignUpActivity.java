@@ -7,12 +7,28 @@ import android.view.View;
 import android.view.Window;
 
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.group_finalproject.API.APIRequestPostData;
+import com.example.group_finalproject.API.PostRetroServer;
+import com.example.group_finalproject.Model.Register.Register;
 import com.example.group_finalproject.R;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class SignUpActivity extends AppCompatActivity {
+
+    EditText etUsername, etEmail, etPassword, etConfirmPassword;
+
+    String userName, userEmail, userPassword, confirmPassword;
+
+    APIRequestPostData apiInterface;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,11 +36,18 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_sign_up);
 
+        etUsername = findViewById(R.id.et_username);
+        etEmail = findViewById(R.id.et_email);
+        etPassword = findViewById(R.id.et_password);
+        etConfirmPassword = findViewById(R.id.et_confirm_password);
+
         TextView signIn = (TextView) findViewById(R.id.textView6);
         signIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), MainActivity.class);
-                startActivityForResult(myIntent, 0);
+//                Intent myIntent = new Intent(view.getContext(), MainActivity.class);
+//                startActivityForResult(myIntent, 0);
+                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+
             }
 
         });
@@ -32,8 +55,50 @@ public class SignUpActivity extends AppCompatActivity {
         Button signUpBtn = (Button) findViewById(R.id.btn_add_report);
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), MainActivity.class);
-                startActivityForResult(myIntent, 0);
+
+                userName = etUsername.getText().toString();
+                userEmail = etEmail.getText().toString();
+                userPassword = etPassword.getText().toString();
+                confirmPassword = etConfirmPassword.getText().toString();
+                if(userName.trim().equals("")){
+                    etUsername.setError("Please enter your name");
+                }else if(userEmail.trim().equals("")){
+                    etEmail.setError("Please enter your email");
+                }else if(userPassword.trim().equals("")){
+                    etPassword.setError("Please enter your password");
+                }else if(confirmPassword.trim().equals("")){
+                    etConfirmPassword.setError("Please confirm your password");
+                }else if(!confirmPassword.trim().equals(userPassword)){
+                    etConfirmPassword.setError("Your password confirmation does not match");
+                }else{
+                    register(userName, userEmail, userPassword);
+                }
+
+            }
+
+            private void register(String userName, String userEmail, String userPassword) {
+
+                apiInterface = PostRetroServer.postConnectRetrofit().create(APIRequestPostData.class);
+                Call<Register> registerCall = apiInterface.registerResponse(userName, userEmail, userPassword);
+                registerCall.enqueue(new Callback<Register>() {
+                    @Override
+                    public void onResponse(Call<Register> call, Response<Register> response) {
+                        if(response.body() != null && response.isSuccessful() && response.body().getCode()==1){
+                            Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Register> call, Throwable t) {
+                        Toast.makeText(SignUpActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
             }
 
         });

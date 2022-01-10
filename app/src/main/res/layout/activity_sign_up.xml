@@ -8,11 +8,12 @@
     tools:context=".Activity.MainActivity">
 
     <EditText
-        android:id="@+id/tv_name2"
+        android:id="@+id/et_email"
         android:layout_width="333dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_text_input"
         android:hint="Email"
+        android:inputType="textEmailAddress"
         android:padding="20dp"
         android:textAlignment="gravity"
         android:textColorHint="#B1B1B1"
@@ -24,11 +25,12 @@
         app:layout_constraintVertical_bias="0.42" />
 
     <EditText
-        android:id="@+id/tv_name4"
+        android:id="@+id/et_password"
         android:layout_width="333dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_text_input"
         android:hint="Password"
+        android:inputType="textPassword"
         android:padding="20dp"
         android:textAlignment="gravity"
         android:textColorHint="#B1B1B1"
@@ -40,11 +42,12 @@
         app:layout_constraintVertical_bias="0.532" />
 
     <EditText
-        android:id="@+id/tv_name5"
+        android:id="@+id/et_confirm_password"
         android:layout_width="333dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_text_input"
         android:hint="Confirm Password"
+        android:inputType="textPassword"
         android:padding="20dp"
         android:textAlignment="gravity"
         android:textColorHint="#B1B1B1"
@@ -128,7 +131,7 @@
         app:layout_constraintVertical_bias="0.214" />
 
     <EditText
-        android:id="@+id/et_category"
+        android:id="@+id/et_username"
         android:layout_width="333dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_text_input"
